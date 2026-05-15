@@ -35,6 +35,7 @@ const report = scanPullRequest({
 assert.equal(report.level, "critical");
 assert.ok(report.findings.some((finding) => finding.id === "secret-like-change"));
 assert.ok(report.findings.some((finding) => finding.id === "sensitive-path"));
+assert.ok(report.findings.some((finding) => finding.id === "missing-review-contract"));
 assert.ok(shouldFail(report.level, "high"));
 
 const markdown = renderMarkdown(report);
@@ -55,5 +56,20 @@ index 1111111..2222222 100644
 });
 
 assert.equal(safeReport.level, "low");
+
+const contractReport = scanPullRequest({
+  files: parseUnifiedDiff(`diff --git a/src/retry.ts b/src/retry.ts
+index 1111111..2222222 100644
+--- a/src/retry.ts
++++ b/src/retry.ts
+@@ -1 +1,2 @@
+ export const retry = true;
++export const maxAttempts = 3;
+`),
+  title: "Update retry behavior",
+  body: "Implements retry behavior."
+});
+
+assert.ok(contractReport.findings.some((finding) => finding.id === "missing-review-contract"));
 
 console.log("Scanner tests passed.");

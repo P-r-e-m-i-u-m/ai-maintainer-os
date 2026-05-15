@@ -11,6 +11,7 @@ export function evaluateRules(input, policy) {
     findings.push(...checkDependencyRisk(input.files));
     findings.push(...checkWorkflowRisk(input.files));
     findings.push(...checkPrDescription(input));
+    findings.push(...checkReviewContract(input));
     return findings;
 }
 function checkSecrets(files) {
@@ -132,6 +133,35 @@ function checkPrDescription(input) {
             reason: "Maintainers need intent, test evidence, and risk notes to review quickly.",
             evidence: [body ? "Description is short" : "Description is empty"],
             recommendation: "Ask for what changed, why, how it was tested, and known risks."
+        }
+    ];
+}
+function checkReviewContract(input) {
+    const body = `${input.title ?? ""}\n${input.body ?? ""}`.toLowerCase();
+    const sourceChanges = input.files.filter((file) => sourceFile.test(file.path) && !testFile.test(file.path));
+    if (sourceChanges.length === 0)
+        return [];
+    const missingSignals = [];
+    if (!/(test|tested|npm run|pytest|cargo test|go test|ci passed)/.test(body)) {
+        missingSignals.push("test evidence");
+    }
+    if (!/(risk|rollback|failure|edge case|unexpected input|blast radius)/.test(body)) {
+        missingSignals.push("risk/failure-mode note");
+    }
+    if (!/(closes|fixes|refs|issue|discussion|rfc|design)/.test(body)) {
+        missingSignals.push("linked issue/design context");
+    }
+    if (missingSignals.length === 0)
+        return [];
+    return [
+        {
+            id: "missing-review-contract",
+            title: "PR is missing maintainer review context",
+            level: missingSignals.length >= 2 ? "medium" : "low",
+            points: missingSignals.length >= 2 ? 25 : 10,
+            reason: "Maintainers need evidence that the author understood, tested, and scoped the change.",
+            evidence: missingSignals,
+            recommendation: "Ask the author to add test evidence, risk notes, and a linked issue/design discussion before deep review."
         }
     ];
 }

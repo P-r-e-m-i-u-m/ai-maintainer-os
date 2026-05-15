@@ -12,6 +12,7 @@ The first release ships with a default maintainer policy.
 - Source changes without tests
 - Large change sets
 - Thin PR descriptions
+- Missing test evidence, risk notes, or linked issue/design context
 
 ## Sensitive Paths
 

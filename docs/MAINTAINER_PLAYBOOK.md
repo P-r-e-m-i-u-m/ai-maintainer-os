@@ -27,6 +27,18 @@ This changes GitHub Actions behavior, so I want one more maintainer review befor
 Please explain the permission changes and whether this can run safely on forked PRs.
 ```
 
+For missing review context:
+
+```md
+Before I do a deep review, please add the review context:
+
+- test evidence
+- failure mode or rollback notes
+- linked issue, discussion, or design context
+
+That keeps review focused and prevents maintainers from reverse-engineering the intent.
+```
+
 For secret-like values:
 
 ```md

@@ -4,6 +4,8 @@
 
 [![CI](https://github.com/P-r-e-m-i-u-m/ai-maintainer-os/actions/workflows/ci.yml/badge.svg)](https://github.com/P-r-e-m-i-u-m/ai-maintainer-os/actions/workflows/ci.yml)
 
+![AI Maintainer OS preview](assets/ai-maintainer-os-card.svg)
+
 AI coding agents can move fast, but maintainers still carry the risk. AI Maintainer OS gives teams a practical review layer for pull requests that may contain generated code, hidden security risk, missing tests, workflow edits, or dependency changes.
 
 It does not try to replace human review. It gives maintainers a clear first pass:
@@ -23,6 +25,7 @@ It does not try to replace human review. It gives maintainers a clear first pass
 - Missing tests for source changes
 - Large hard-to-review PRs
 - Thin PR descriptions with weak review context
+- Missing test evidence, risk notes, or linked issue/design context
 - Suspicious dependency versions such as `latest`
 
 ## Why Maintainers Need This
@@ -118,6 +121,8 @@ Required Actions
 - [Architecture](docs/ARCHITECTURE.md)
 - [Policy model](docs/POLICY.md)
 - [Maintainer playbook](docs/MAINTAINER_PLAYBOOK.md)
+- [AI PR review standard](docs/AI_PR_REVIEW_STANDARD.md)
+- [Research notes](docs/RESEARCH_NOTES.md)
 
 ## License
 
