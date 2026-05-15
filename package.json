@@ -1,0 +1,50 @@
+{
+  "name": "ai-maintainer-os",
+  "version": "0.1.0",
+  "description": "GitHub Action and CLI for reviewing AI-assisted pull requests with risk scoring, evidence, and maintainer-ready reports.",
+  "type": "module",
+  "bin": {
+    "ai-maintainer-os": "dist/src/cli.js"
+  },
+  "main": "dist/src/action.js",
+  "files": [
+    "dist",
+    "action.yml",
+    "README.md",
+    "LICENSE"
+  ],
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "test": "npm run build && node --test dist/tests/*.test.js",
+    "demo": "npm run build && node dist/src/cli.js scan --diff examples/sample-pr.diff --format markdown --fail-on never",
+    "check": "npm run build && npm test && npm run demo"
+  },
+  "keywords": [
+    "github-action",
+    "ai-code-review",
+    "maintainers",
+    "pull-request",
+    "security",
+    "developer-tools",
+    "typescript"
+  ],
+  "author": "Syed Abdul Aman",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.11.1",
+    "@actions/github": "^6.0.0",
+    "commander": "^12.1.0",
+    "picocolors": "^1.1.1",
+    "zod": "^3.25.76"
+  },
+  "devDependencies": {
+    "@types/node": "^22.10.2",
+    "typescript": "^5.7.2"
+  },
+  "overrides": {
+    "undici": "^6.24.0"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

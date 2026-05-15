@@ -1,0 +1,27 @@
+name: AI Maintainer OS
+description: Review AI-assisted pull requests with deterministic maintainer guardrails.
+author: P-r-e-m-i-u-m
+
+inputs:
+  github-token:
+    description: GitHub token used to post PR comments.
+    required: false
+    default: ${{ github.token }}
+  fail-on:
+    description: Risk level that fails the workflow. One of low, medium, high, critical.
+    required: false
+    default: high
+  comment:
+    description: Post a PR comment with the maintainer report.
+    required: false
+    default: "true"
+
+outputs:
+  risk-level:
+    description: Computed PR risk level.
+  risk-score:
+    description: Computed PR risk score from 0 to 100.
+
+runs:
+  using: node20
+  main: dist/src/action.js

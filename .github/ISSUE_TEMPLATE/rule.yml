@@ -1,0 +1,26 @@
+name: New review rule
+description: Propose a deterministic PR review rule.
+title: "[Rule]: "
+labels: ["rule", "help wanted"]
+body:
+  - type: textarea
+    id: signal
+    attributes:
+      label: Signal
+      description: What pattern should the rule detect?
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence
+      description: What file/path/diff evidence should appear in the report?
+    validations:
+      required: true
+  - type: textarea
+    id: recommendation
+    attributes:
+      label: Maintainer recommendation
+      description: What should the maintainer ask for?
+    validations:
+      required: true

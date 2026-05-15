@@ -1,0 +1,1 @@
+{"version":3,"file":"policy.js","sourceRoot":"","sources":["../../src/policy.ts"],"names":[],"mappings":"AAEA,MAAM,UAAU,aAAa,CAAC,SAAoB,MAAM;IACtD,OAAO;QACL,MAAM;QACN,4BAA4B,EAAE,IAAI;QAClC,qBAAqB,EAAE;YACrB,wBAAwB;YACxB,sBAAsB;YACtB,cAAc;YACd,kBAAkB;YAClB,oBAAoB;YACpB,qBAAqB;YACrB,gBAAgB;YAChB,aAAa;YACb,0BAA0B;YAC1B,OAAO;YACP,SAAS;YACT,QAAQ;YACR,aAAa;SACd;KACF,CAAC;AACJ,CAAC"}
