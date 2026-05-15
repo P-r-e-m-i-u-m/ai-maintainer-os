@@ -85,6 +85,45 @@ jobs:
           comment: "true"
 ```
 
+
+## Monorepo Example
+
+For monorepos, start with a stricter threshold on packages that own authentication, payments, deployment, or shared runtime code. Keep the workflow copy-paste friendly, then document the package-specific review expectations for maintainers.
+
+```yaml
+name: AI Maintainer OS
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, edited]
+
+permissions:
+  contents: read
+  pull-requests: read
+  issues: write
+
+jobs:
+  review:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
+
+      - uses: P-r-e-m-i-u-m/ai-maintainer-os@v0.1.0
+        with:
+          fail-on: medium
+          comment: "true"
+```
+
+Suggested monorepo review expectations:
+
+- Treat `apps/web/src/auth/**`, `apps/api/src/billing/**`, `packages/db/**`, and `.github/workflows/**` as sensitive package paths.
+- Expect tests near the changed package, such as `apps/web/__tests__/**`, `apps/api/tests/**`, or `packages/*/tests/**`.
+- Use `fail-on: medium` for security-sensitive packages and shared infrastructure.
+- Use `fail-on: high` for general application packages where maintainers want fewer blocking checks.
+- Use `fail-on: critical` for experimental packages where the report should inform review but rarely block CI.
+
 ## Example Output
 
 ```md
